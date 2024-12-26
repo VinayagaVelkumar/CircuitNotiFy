@@ -1,0 +1,126 @@
+<div class="container checkout-container mt-5" id="checkout-container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <div class="card shadow-lg">
+          <div class="card-header bg-primary text-white">
+            <h1 class="text-center mb-0">Checkout</h1>
+          </div>
+          
+          <div class="card-body">
+            <section class="payment-selection mb-4">
+              <h2 class="h4 mb-3">Select Payment Method</h2>
+              
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="card payment-option" 
+                       [ngClass]="{
+                         'border-primary': selectedPaymentMethod === 1,
+                         'border-danger': paypalState === 'onBreak',
+                         'border-warning': paypalState === 'halfOpen'
+                       }">
+                    <div class="card-body">
+                      <button 
+                        class="btn btn-block w-100"
+                        [ngClass]="{
+                          'btn-primary': paypalState === 'active',
+                          'btn-danger': paypalState === 'onBreak',
+                          'btn-warning': paypalState === 'halfOpen'
+                        }"
+                        (click)="processPayment(1)"
+                        [disabled]="paypalState === 'onBreak'"
+                      >
+                        <i class="fab fa-paypal me-2"></i>PayPal
+                      </button>
+                      
+                      <div *ngIf="paypalState !== 'active'" class="mt-2 text-center">
+                        <small 
+                          *ngIf="paypalState === 'onBreak'" 
+                          class="text-danger"
+                        >
+                          <i class="fas fa-exclamation-triangle me-1"></i>
+                          PayPal is currently unavailable
+                        </small>
+                        <small 
+                          *ngIf="paypalState === 'halfOpen'" 
+                          class="text-warning"
+                        >
+                          <i class="fas fa-exclamation-circle me-1"></i>
+                          Service may be unstable
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-md-6">
+                  <div class="card payment-option" 
+                       [ngClass]="{
+                         'border-primary': selectedPaymentMethod === 2,
+                         'border-danger': stripeState === 'onBreak',
+                         'border-warning': stripeState === 'halfOpen'
+                       }">
+                    <div class="card-body">
+                      <button 
+                        class="btn btn-block w-100"
+                        [ngClass]="{
+                          'btn-primary': stripeState === 'active',
+                          'btn-danger': stripeState === 'onBreak',
+                          'btn-warning': stripeState === 'halfOpen'
+                        }"
+                        (click)="processPayment(2)"
+                        [disabled]="stripeState === 'onBreak'"
+                      >
+                        <i class="fab fa-stripe me-2"></i>Stripe
+                      </button>
+                      
+                      <div *ngIf="stripeState !== 'active'" class="mt-2 text-center">
+                        <small 
+                          *ngIf="stripeState === 'onBreak'" 
+                          class="text-danger"
+                        >
+                          <i class="fas fa-exclamation-triangle me-1"></i>
+                          Stripe is currently unavailable
+                        </small>
+                        <small 
+                          *ngIf="stripeState === 'halfOpen'" 
+                          class="text-warning"
+                        >
+                          <i class="fas fa-exclamation-circle me-1"></i>
+                          Service may be unstable
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            
+            <section class="checkout-summary">
+              <h2 class="h4 mb-3">Order Summary</h2>
+              <div class="card bg-light">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between mb-2">
+                    <span>Items:</span>
+                    <strong>{{ orderDetails.items }}</strong>
+                  </div>
+                  <div class="d-flex justify-content-between mb-3">
+                    <span>Total:</span>
+                    <strong class="text-primary">${{ orderDetails.total | number:'1.2-2' }}</strong>
+                  </div>
+                  
+                  <button 
+                    class="btn btn-success btn-lg w-100" 
+                    (click)="completeCheckout()" 
+                    [disabled]="!selectedPaymentMethod"
+                  >
+                    Complete Checkout
+                    <i class="fas fa-shopping-cart ms-2"></i>
+                  </button>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

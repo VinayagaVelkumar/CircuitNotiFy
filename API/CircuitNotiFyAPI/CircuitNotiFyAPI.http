@@ -1,0 +1,6 @@
+@CircuitNotiFyAPI_HostAddress = http://localhost:5142
+
+GET {{CircuitNotiFyAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
