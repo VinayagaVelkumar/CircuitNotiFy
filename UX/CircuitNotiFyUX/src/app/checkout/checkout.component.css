@@ -1,0 +1,46 @@
+.checkout-container {
+    min-height: 100vh;
+    align-items: center;
+    background-color: #f8f9fa;
+  }
+  
+  .payment-option {
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .payment-option:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+  
+  .payment-option.border-primary {
+    border: 2px solid var(--bs-primary);
+  }
+  
+  .payment-option.border-danger {
+    border: 2px solid var(--bs-danger);
+  }
+  
+  .payment-option.border-warning {
+    border: 2px solid var(--bs-warning);
+  }
+  
+  /* Responsive adjustments */
+    .checkout-container {
+      padding: 20px;
+    }
+    
+    .card {
+      width: 100%;
+    }
+  
+  /* Font Awesome Icons */
+  .fab, .fas {
+    margin-right: 8px;
+  }
+
+  #checkout-container
+  {
+    width: 100%;
+  }
